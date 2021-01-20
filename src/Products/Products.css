@@ -1,0 +1,24 @@
+.Products {
+    width: 60%;
+    margin: auto;
+    border: 5px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 16px;
+}
+/*styles dynamically injected*/
+
+.red {
+    background-color: red;
+    color: black;
+}
+
+.green {
+    background-color: green;
+    color: black;
+}
+
+@media (min-width:500px) {
+    .Products {
+        width: 450px;
+    }
+}
