@@ -1,8 +1,8 @@
 import React,{ Component } from "react";
 //import logo from './logo.svg';
 import './App.css';
-import Person from "./Person/Person";
-import Product from "./Products/Products";
+import Person from "../components/Person/Person";
+import Product from "../components/Products/Products";
 import Radium, { StyleRoot } from 'radium'; 
 
 class App extends Component {
