@@ -5,12 +5,13 @@ import Header from '../views/layouts/Header';
 import Product from '../views/Product';
 import Home from '../views/Home';
 import food from '../food.json';
+import AuthComponent from '../components/Auth/AuthComponent';
 
 class App extends Component {
   //https://blog.logrocket.com/react-lifecycle-methods-tutorial-examples/
   constructor() {
     super();
-    this.state = { value: 'Hello World', inventory : food };
+    this.state = { value: 'Hello World', inventory : food, flag : false };
   }
   handleChange = (e) => {
     this.setState({ value: e.target.value });
@@ -27,8 +28,11 @@ class App extends Component {
         />
         <p>{this.state.value}</p> */}
         <Header />
-        <Home inventory={this.state.inventory}></Home>
-        <Product inventory={this.state.inventory}></Product>
+        <AuthComponent/>
+          
+          
+          { (this.state.flag) ? <Home inventory={this.state.inventory}></Home> : null}
+          { (this.state.flag) ? <Product inventory={this.state.inventory}></Product> : null }
       </div>
     );
   }

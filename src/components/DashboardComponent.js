@@ -7,7 +7,7 @@ import { updateAge, fetchUsers } from "../store/sliceReducers";
 const DashboardComponent = (props) => {
     const dispatch = useDispatch();
     const {name, age} = useSelector((state) => {
-        return state;
+        return state.sliceReducers;
     })
     const changeAge = (age) => {
         dispatch(updateAge(age))
