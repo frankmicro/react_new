@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {externalPostCall} from '../helpers/http'
-import {storeToken} from '../helpers/localstorage'
-
+import {externalPostCall, externalGetCall} from '../helpers/http'
+import {storeToken} from './../helpers/localstorage'
+ 
 const initialState = {
     token : '',
     loading : false,
@@ -12,7 +12,7 @@ const initialState = {
 export const signUpUser = createAsyncThunk(
     'signUpUser',
     async (body) => {
-        const result = await externalPostCall('v1/admin/signup', body)
+        const result = await externalPostCall('/v1/admin/signup', body)
         return result
     }
 )
@@ -20,7 +20,15 @@ export const signUpUser = createAsyncThunk(
 export const signInUser = createAsyncThunk(
     'signInUser',
     async (body) => {
-        const result = await externalPostCall('v1/admin/signin', body)
+        const result = await externalPostCall('/v1/admin/signin', body)
+        return result
+    }
+)
+
+export const productsGet = createAsyncThunk(
+    'productsGet',
+    async () => {
+        const result = await externalGetCall('/v1/products')
         return result
     }
 )
@@ -46,7 +54,7 @@ const authReducer = createSlice({
         },
         [signInUser.fulfilled]:(state, action)=>{
             state.loading = false
-            if(action.payload.success && action.payload.data) {
+            if(action.payload.success) {
                 state.success =  action.payload.message
                 state.token = action.payload.data.token
                 storeToken(state.token)

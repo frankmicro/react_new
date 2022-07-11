@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3bf2164b.css",
+    "main.js": "/static/js/main.e02b035b.js",
+    "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
+    "static/media/modak.svg": "/static/media/modak.905f3f42e31302df1adc.svg",
+    "static/media/modak.eot": "/static/media/modak.15c42c437499f463c5ff.eot",
+    "static/media/modak.ttf": "/static/media/modak.92743c61c93f6d9daba4.ttf",
+    "static/media/splash.jpg": "/static/media/splash.e52b26b001ce93f1feb2.jpg",
+    "static/media/modak.woff": "/static/media/modak.4274e76e5628992cc645.woff",
+    "static/media/icofont.svg": "/static/media/icofont.89dcd47c024cd39d08d8.svg",
+    "static/media/icofont.eot": "/static/media/icofont.623335d82ea14a2e7223.eot",
+    "static/media/icofont.ttf": "/static/media/icofont.17406f6200f4bdaeb0b4.ttf",
+    "static/media/icofont.woff": "/static/media/icofont.747387786e1126664eba.woff",
+    "static/media/icofont.woff2": "/static/media/icofont.309758132054d6a00c96.woff2",
+    "index.html": "/index.html",
+    "main.3bf2164b.css.map": "/static/css/main.3bf2164b.css.map",
+    "main.e02b035b.js.map": "/static/js/main.e02b035b.js.map",
+    "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3bf2164b.css",
+    "static/js/main.e02b035b.js"
+  ]
+}

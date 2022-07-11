@@ -1,17 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-//import './index.css';
 import '../src/assets/styles/style.scss'
-import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import store from './store/store';
 import { Provider } from 'react-redux';
+import { AuthProvider } from './context/AuthProvider';
+// import Router from './routes'
+import axios from './helpers/http';
+import RoutingContainer from './containers/RoutingContainer';
+
+axios.interceptors.request.use(request => {
+  return request
+}, error => {
+  return Promise.reject(error)
+})
+
+axios.interceptors.response.use(response => {
+  return response
+}, error => {
+  return error.response
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App title="My-app"/>
+      <BrowserRouter>
+
+        <AuthProvider>
+        {/* <Router /> */}
+          <Routes>
+            <Route path="/*" element={<RoutingContainer/>} />
+          </Routes>
+          </AuthProvider>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

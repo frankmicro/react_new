@@ -1,23 +1,40 @@
-import React, { useState } from "react";
-import { signUpUser, signInUser } from "../../store/authReducer";
+import React, { useEffect, useState } from "react";
+import { signUpUser, signInUser, productsGet } from "../../store/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 import './index.css'
+import { useNavigate, useLocation } from "react-router";
+import {getToken} from "../../helpers/localstorage";
 
 const AuthComponent = () => {
-    const [getAuth, setAuth] = useState('SignIn')
+    const [getUser, setUser] = useState('SignIn')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch();
     const {error, success, loading} = useSelector(state=> {
         return state.user
     })
+    const userToken = getToken();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        if (userToken) {
+            navigate(from, { replace: true });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[userToken])
+
     const authenticate = () => {
         const payload = {email,password}
-        if (getAuth === 'SignIn') {
+        if (getUser === 'SignIn') {
             dispatch(signInUser(payload))
         } else {
             dispatch(signUpUser(payload))
         }
+    }
+    const fetchMe = () => {
+        dispatch(productsGet())
     }
     return (
         <div className="container-fluid h-100">
@@ -25,7 +42,7 @@ const AuthComponent = () => {
                 <div className="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
                     <form>
                         <div>
-                            <h3>{getAuth}</h3>
+                            <h3>{getUser}</h3>
                         </div>
                         {
                             loading ? <p className="text-primary">'Loading...'</p> : 
@@ -48,16 +65,16 @@ const AuthComponent = () => {
                             type="password"/>
                         </div>
                         <div className="form-group">
-                            <button type="button" className="btn btn-info" onClick={()=>authenticate()}>{getAuth}</button>
+                            <button type="button" className="btn btn-info" onClick={()=>authenticate()}>{getUser}</button>
                         </div>
                         <div>
                             {
-                                getAuth === 'SignIn' ? 
-                                <p className="linkbutton" onClick={()=>setAuth('SignUp')}>Don't have an account click here!</p>
+                                getUser === 'SignIn' ? 
+                                <p className="linkbutton" onClick={()=>setUser('SignUp')}>Don't have an account click here!</p>
                                 :
-                                <p className="linkbutton" onClick={()=>setAuth('SignIn')}>Login if already have an account!</p>
+                                <p className="linkbutton" onClick={()=>setUser('SignIn')}>Login if already have an account!</p>
                             }
-                            
+                            <button type="button" className="btn btn-info" onClick={()=>fetchMe()}>Fetch</button>
                         </div>
                     </form>
                 </div>
