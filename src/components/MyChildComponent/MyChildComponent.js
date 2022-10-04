@@ -9,6 +9,8 @@ const MyChildComponent = (props) => {
     //themeReducer, useMemo, useCallback,useRef,useLayoutEffect,useDispatch,useSelector
     //useHistory, useLocation, useParams, useRouteMatch
     //Math.random().toString(36).substring(2,7)
+    //https://collect.js.org/api/contains.html
+    https://kags.me.ke/post/generate-dynamic-pdf-incoice-using-react-pdf/
     return (
         <div>
             <p>MyChildComponent { props.name }</p>

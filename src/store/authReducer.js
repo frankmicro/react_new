@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {externalPostCall, externalGetCall} from '../helpers/http'
+import {externalPostCall} from '../helpers/http'
 import {storeToken} from './../helpers/localstorage'
  
 const initialState = {
@@ -21,14 +21,6 @@ export const signInUser = createAsyncThunk(
     'signInUser',
     async (body) => {
         const result = await externalPostCall('/v1/admin/signin', body)
-        return result
-    }
-)
-
-export const productsGet = createAsyncThunk(
-    'productsGet',
-    async () => {
-        const result = await externalGetCall('/v1/products')
         return result
     }
 )

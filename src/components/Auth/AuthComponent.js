@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { signUpUser, signInUser, productsGet } from "../../store/authReducer";
+import { signUpUser, signInUser } from "../../store/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 import './index.css'
 import { useNavigate, useLocation } from "react-router";
@@ -32,9 +32,6 @@ const AuthComponent = () => {
         } else {
             dispatch(signUpUser(payload))
         }
-    }
-    const fetchMe = () => {
-        dispatch(productsGet())
     }
     return (
         <div className="container-fluid h-100">
@@ -74,7 +71,6 @@ const AuthComponent = () => {
                                 :
                                 <p className="linkbutton" onClick={()=>setUser('SignIn')}>Login if already have an account!</p>
                             }
-                            <button type="button" className="btn btn-info" onClick={()=>fetchMe()}>Fetch</button>
                         </div>
                     </form>
                 </div>
