@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 
 const ProductList = (props) => {
-  const [quantity, setQuantity] = useState(0)
+  // const [quantity, setQuantity] = useState(0)
     return (
         <div>
             <div className="card-title">
@@ -26,7 +26,7 @@ const ProductList = (props) => {
                     ${ props.price }
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="cell">
                     <label>Quantity:</label>
                   </div>
@@ -35,11 +35,11 @@ const ProductList = (props) => {
                     onChange={e => setQuantity(e.target.value)}
                     value={quantity}/>
                   </div>
-                </div>
+                </div> */}
               </form>
             </div>
             <div className="card-footer">
-              <button onClick={() => props.handleClick(props.id, parseInt(quantity))} className="btn btn-light">
+              <button onClick={() => props.addToCart(props.id, parseInt(1))} className="btn btn-light">
                 Add to cart
               </button>
             </div>

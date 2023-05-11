@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteCartElement, updateCartTotal } from "../store/productReducer";
 
 const CartComponent = () => {
-  const { cart } = useSelector((state) => {
+  const dispatch = useDispatch();
+  const { cart, cartTotal } = useSelector((state) => {
     return state.productReducer;
   });
+  const removeItems = (itemIndex, total) => {
+    dispatch(deleteCartElement(itemIndex))
+    dispatch(updateCartTotal(cartTotal - total));
+  }
   return (
     <div className="cart-body">
        <table className="cart-table">
@@ -25,16 +31,18 @@ const CartComponent = () => {
          <tbody>
      {
       cart.length ? cart.map((res, index) => (
-        <tr key={index}>
+        <tr key={res?.id}>
                   <td width={2} height={1}>
                     <i className={`icofont-${res?.icon} icofont-3x`}></i>
                   </td>
                   <td>{res?.name}</td>
                   <td>{res?.price['USD']}</td>
                   <td className="center">{res?.totalQuantity}</td>
-                  <td>{res?.total}</td>
+                  <td>{res?.total.toFixed(2)}</td>
                   <td className="center">
-                    <button className="btn btn-light cart-remove">&times;</button>
+                    <button 
+                    onClick={() => removeItems(index, res?.total)}
+                    className="btn btn-light cart-remove">&times;</button>
                   </td>
                 </tr>
       )) : 
@@ -46,7 +54,7 @@ const CartComponent = () => {
      </table>
       <div className="spread">
         <span>
-          <strong>Total:</strong> 00
+          <strong>Total:</strong> {cartTotal.toFixed(2)}
         </span>
         <button className="btn btn-light">Checkout</button>
       </div>

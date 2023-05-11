@@ -7,8 +7,8 @@ import {getToken} from "../../helpers/localstorage";
 
 const AuthComponent = () => {
     const [getUser, setUser] = useState('SignIn')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('ron4@gmail.com')
+    const [password, setPassword] = useState('123456')
     const dispatch = useDispatch();
     const {error, success, loading} = useSelector(state=> {
         return state.user

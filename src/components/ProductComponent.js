@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import ProductList from "../views/ProductList";
 import food from "../food.json";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCart, updateInventory, deleteCartElement } from "../store/productReducer";
+import { updateCart, updateInventory, deleteCartElement, updateCartTotal } from "../store/productReducer";
 import {filterArray} from '../containers/utils'
 
 const ProductComponent = (props) => {
   const dispatch = useDispatch();
+  const [tempTotal, setTempTotal] = useState(0);
   const { cart, inventory } = useSelector((state) => {
     return state.productReducer;
   });
-  const handleClick = (id, quantity) => {
+  const addToCart = (id, quantity) => {
     let tempCart = filterArray(cart, id);
     if (tempCart.length) {
       let index = cart
@@ -24,6 +25,11 @@ const ProductComponent = (props) => {
         total: res.price["USD"] * quantity + parseFloat(res.total),
         totalQuantity: res.totalQuantity + quantity,
       }));
+      dispatch(updateCart(tempCart[0]));
+      let cartSubtotal = cart.reduce((acc, res) => {
+          return acc += res.total
+      },0);
+      dispatch(updateCartTotal(cartSubtotal));
     } else {
       tempCart = inventory
         .filter((res) => res.id === id)
@@ -32,28 +38,36 @@ const ProductComponent = (props) => {
           total: res.price["USD"] * quantity,
           totalQuantity: quantity,
         }));
+      if (!tempTotal) {
+        setTempTotal(tempCart[0]['total']);
+      }
+      dispatch(updateCart(tempCart[0]));
+      dispatch(updateCartTotal(tempTotal));
     }
-    dispatch(updateCart(tempCart[0]));
+    
   };
   useState(() => {
     dispatch(updateInventory(food));
   }, []);
-  // let inventoryData = null;
-  // if (props.displayType === "dashboard") {
-  //   inventoryData = props.inventory.filter(
-  //     (res) => res.status === props.inventoryType
-  //   );
-  // }
-  // if (props.displayType === "products") {
-  //   inventoryData = props.inventory;
-  // }
+  let inventoryData = null;
+  if (props.displayType === "dashboard") {
+    inventoryData = props.inventory.filter(
+      (res) => res.status === props.inventoryType
+    );
+    if (props.productSearch) {
+      inventoryData = inventoryData.filter(res => res.name.includes(props.productSearch));
+    }
+  }
+  if (props.displayType === "products") {
+    inventoryData = inventory;
+  }
   return (
     <div>
-      {inventory
-        ? inventory.map((res, index) => (
+      {inventoryData
+        ? inventoryData.map((res, index) => (
             <div className="card" key={index}>
               <ProductList
-                handleClick={handleClick}
+                addToCart={addToCart}
                 key={res.id}
                 id={res.id}
                 name={res.name}

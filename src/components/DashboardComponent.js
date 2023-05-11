@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MainWrapper from "../containers/MainWrapper";
 import ProductComponent from "./ProductComponent";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,6 +7,10 @@ import food from '../food.json';
 
 const DashboardComponent = (props) => {
     const dispatch = useDispatch();
+    const [searchInput, setSearchInput ] = useState('');
+    const [productSearch, setProductSearch] = useState('');
+    const inputTextBoxStyle = {width:"300px", height:"20px", margin:"5px"};
+    const actionBtnStyle = {margin:"0px 2px 10px"};
     const {name, age} = useSelector((state) => {
         return state.sliceReducers;
     })
@@ -16,13 +20,47 @@ const DashboardComponent = (props) => {
     const changeName = () => {
         dispatch(fetchUsers())
     }
+    const changeText = (data) => {
+        setSearchInput(data)
+    }
+    const productSearchFn = (data) => {
+        setProductSearch(data);
+    }
     return (
         <div>
             <MainWrapper pageName="Recommended" class='wrapper'>
                 <h1>{age}, {name}</h1>
-                <button onClick={()=>changeAge(Math.floor(Math.random() * 10))}>Click Me!</button>
-                <button onClick={()=>changeName(Math.random().toString(36).substring(2,7))}>Update Name!</button>
-                <ProductComponent inventory={food} inventoryType="active" displayType="dashboard"></ProductComponent>
+                <button className="btn btn-primary" 
+                    style={actionBtnStyle}
+                    onClick={()=>changeAge(Math.floor(Math.random() * 10))}>Click Me!
+                </button>
+                <button className="btn btn-primary" 
+                    style={actionBtnStyle}
+                    onClick={()=>changeName(Math.random().toString(36).substring(2,7))}>Update Name!
+                </button>
+                <>
+                    <input type="text" 
+                    placeholder="Search Products"
+                    style={inputTextBoxStyle}
+                    value={searchInput}
+                    onChange={(e) =>(
+                        changeText(e.target.value)
+                    )}/>
+                </>
+                <button className="btn btn-primary" 
+                    style={actionBtnStyle}
+                    onClick={()=>{
+                        productSearchFn(searchInput)
+                    }}>Search
+                </button>
+                <button className="btn btn-info" 
+                    style={actionBtnStyle}
+                    onClick={()=>{
+                        productSearchFn('')
+                        changeText('')
+                    }}>Reset
+                </button>
+                <ProductComponent inventory={food} productSearch={productSearch} inventoryType="active" displayType="dashboard"></ProductComponent>
             </MainWrapper>
         </div>
     )

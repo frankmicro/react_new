@@ -3,12 +3,12 @@ import Header from "../views/layouts/Header";
 import Sidebar from "../views/layouts/Sidebar"
 
 const MainWrapper = (props) => {
-    const [sidebar, setSidebar] = useState(false) 
+    const [sidebar, setSidebar] = useState(true) 
     const handleSidebar = isVisible => {
         setSidebar(isVisible)
     }
     return (
-        <div>
+        <>
         <Header handleSidebar={handleSidebar}/>
         {
            sidebar ? (
@@ -21,7 +21,7 @@ const MainWrapper = (props) => {
                 {props.children}
             </div>
         </main>
-        </div>
+        </>
     );
 }
 

@@ -20,7 +20,7 @@ export const signUpUser = createAsyncThunk(
 export const signInUser = createAsyncThunk(
     'signInUser',
     async (body) => {
-        const result = await externalPostCall('/v1/admin/signin', body)
+        const result = await externalPostCall('/v2/admin/login', body)
         return result
     }
 )
@@ -46,9 +46,9 @@ const authReducer = createSlice({
         },
         [signInUser.fulfilled]:(state, action)=>{
             state.loading = false
-            if(action.payload.success) {
-                state.success =  action.payload.message
-                state.token = action.payload.data.token
+            if(action.payload.response.success) {
+                state.success =  action.payload.response.message
+                state.token = action.payload.response.data
                 storeToken(state.token)
             } else {
                 state.error = action.payload.message
