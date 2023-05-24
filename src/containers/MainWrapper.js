@@ -3,7 +3,7 @@ import Header from "../views/layouts/Header";
 import Sidebar from "../views/layouts/Sidebar"
 
 const MainWrapper = (props) => {
-    const [sidebar, setSidebar] = useState(true) 
+    const [sidebar, setSidebar] = useState(false) 
     const handleSidebar = isVisible => {
         setSidebar(isVisible)
     }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import MainWrapper from "../containers/MainWrapper";
 import ProductComponent from "./ProductComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAge, fetchUsers } from "../store/sliceReducers";
@@ -28,8 +27,7 @@ const DashboardComponent = (props) => {
     }
     return (
         <div>
-            <MainWrapper pageName="Recommended" class='wrapper'>
-                <h1>{age}, {name}</h1>
+                {/* <h1>{age}, {name}</h1>
                 <button className="btn btn-primary" 
                     style={actionBtnStyle}
                     onClick={()=>changeAge(Math.floor(Math.random() * 10))}>Click Me!
@@ -37,7 +35,7 @@ const DashboardComponent = (props) => {
                 <button className="btn btn-primary" 
                     style={actionBtnStyle}
                     onClick={()=>changeName(Math.random().toString(36).substring(2,7))}>Update Name!
-                </button>
+                </button> */}
                 <>
                     <input type="text" 
                     placeholder="Search Products"
@@ -61,7 +59,6 @@ const DashboardComponent = (props) => {
                     }}>Reset
                 </button>
                 <ProductComponent inventory={food} productSearch={productSearch} inventoryType="active" displayType="dashboard"></ProductComponent>
-            </MainWrapper>
         </div>
     )
 }

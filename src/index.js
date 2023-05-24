@@ -7,16 +7,16 @@ import store from './store/store';
 import { Provider } from 'react-redux';
 import { AuthProvider } from './context/AuthProvider';
 // import Router from './routes'
-import axios from './helpers/http';
+import instance from './helpers/http';
 import RoutingContainer from './containers/RoutingContainer';
 
-axios.interceptors.request.use(request => {
+instance.interceptors.request.use(request => {
   return request
 }, error => {
   return Promise.reject(error)
 })
 
-axios.interceptors.response.use(response => {
+instance.interceptors.response.use(response => {
   return response
 }, error => {
   return error.response

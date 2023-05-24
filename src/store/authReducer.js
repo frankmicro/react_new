@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {externalPostCall} from '../helpers/http'
-import {storeToken} from './../helpers/localstorage'
+import {externalPostCall, externalGetCall} from '../helpers/api';
+import {storeToken} from './../helpers/localstorage';
  
 const initialState = {
     token : '',
