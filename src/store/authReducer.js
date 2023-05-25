@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {externalPostCall, externalGetCall} from '../helpers/api';
-import {storeToken} from './../helpers/localstorage';
+import {setStorage} from './../helpers/localstorage';
  
 const initialState = {
     token : '',
@@ -49,7 +49,7 @@ const authReducer = createSlice({
             if(action.payload.response.success) {
                 state.success =  action.payload.response.message
                 state.token = action.payload.response.data
-                storeToken(state.token)
+                setStorage('token',state.token)
             } else {
                 state.error = action.payload.message
             }

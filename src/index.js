@@ -5,7 +5,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import store from './store/store';
 import { Provider } from 'react-redux';
-import { AuthProvider } from './context/AuthProvider';
 // import Router from './routes'
 import instance from './helpers/http';
 import RoutingContainer from './containers/RoutingContainer';
@@ -27,13 +26,10 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-
-        <AuthProvider>
         {/* <Router /> */}
           <Routes>
             <Route path="/*" element={<RoutingContainer/>} />
           </Routes>
-          </AuthProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

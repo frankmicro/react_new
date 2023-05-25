@@ -11,8 +11,7 @@ const Missing = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     const mystyle = {
-        margin : "50px 50px 50px 50px",
-        "font-size" : "120px" 
+        margin : "50px 50px 50px 50px"
       };
     return (
         <React.Fragment>

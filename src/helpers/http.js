@@ -1,10 +1,10 @@
 import axios from "axios"
-import {getToken} from './localstorage'
+import {getStorage} from './localstorage'
 
 const instance = axios.create({
     baseURL:process.env.REACT_APP_BASE_URL,
     headers: {
-        Authorization : `${getToken()}`
+        Authorization : `${getStorage('token')}`
     }
 });
 

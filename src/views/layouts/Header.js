@@ -1,11 +1,19 @@
+import { useLocation, Navigate, Outlet } from "react-router-dom";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { clearStorage } from "../../helpers/localstorage";
+
 
 const Header = (props) => {
+  const location = useLocation();
   const { cart } = useSelector((state) => {
     return state.productReducer;
   });
+  const logoutUser = () => {
+    clearStorage('token');
+    <Navigate to="/login" state={{ from: location }} replace />
+  }
     return (
       <div>
         <header className="top-bar spread">
@@ -17,9 +25,12 @@ const Header = (props) => {
             <Link to="/products" className="top-bar-link">
               <span>Products</span>
             </Link>
-            <Link to="/product-details" className="top-bar-link">
+            {/* <Link to="/product-details" className="top-bar-link">
               <span>Past Orders</span>
-            </Link>
+            </Link> */}
+            <a href="#" onClick={logoutUser} className="top-bar-link">
+              <span>Logout</span>
+            </a>
           </nav>
           <a
             onClick={() => props.handleSidebar(true)}

@@ -55,7 +55,7 @@ const ProductComponent = (props) => {
       (res) => res.status === props.inventoryType
     );
     if (props.productSearch) {
-      inventoryData = inventoryData.filter(res => res.name.includes(props.productSearch));
+      inventoryData = inventoryData.filter(res => res.name.toLowerCase().includes(props.productSearch.toLowerCase()));
     }
   }
   if (props.displayType === "products") {

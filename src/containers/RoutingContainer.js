@@ -6,9 +6,9 @@ import ProductList from "../views/ProductList";
 import MainLayout from "../views/layouts/MainLayout";
 import Missing from "../views/layouts/Missing";
 import RequireAuth from "../components/RequireAuth";
+import Basic from "../views/Basic";
 import { Route, Routes } from "react-router";
 const Product = React.lazy(() => import('../views/Product'));
-
 
 const RoutingContainer = () => {
     return (
@@ -24,7 +24,7 @@ const RoutingContainer = () => {
                             <Product />
                         </React.Suspense>
                     } />
-                    <Route path="/product-details" element={<ProductList/>}/>
+                    {/* <Route path="/product-details" element={<Basic/>}/> */}
                 </Route>
                 {/** catch all routes */}
                 <Route path="*" element={<Missing/>}/>

@@ -1,7 +1,11 @@
-export const storeToken = (token) => {
-    localStorage.setItem('token',token)
+export const setStorage = (key, value) => {
+    localStorage.setItem(key,JSON.stringify(value));
 }
 
-export const getToken = () => {
-    return localStorage.getItem('token') ? localStorage.getItem('token') : null
+export const getStorage = (key) => {
+    return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : null;
+}
+
+export const clearStorage = (key) => {
+    return localStorage.removeItem(key);
 }
