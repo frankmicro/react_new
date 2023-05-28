@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductList from "../views/ProductList";
 import food from "../food.json";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,6 +11,14 @@ const ProductComponent = (props) => {
   const { cart, inventory } = useSelector((state) => {
     return state.productReducer;
   });
+  useEffect(() => {
+    if (cart.length) {
+      let cartSubtotal = cart.reduce((acc, res) => {
+        return acc += res.total
+      },0);
+      dispatch(updateCartTotal(cartSubtotal));  
+    }
+  },[cart])
   const addToCart = (id, quantity) => {
     let tempCart = filterArray(cart, id);
     if (tempCart.length) {
@@ -26,10 +34,7 @@ const ProductComponent = (props) => {
         totalQuantity: res.totalQuantity + quantity,
       }));
       dispatch(updateCart(tempCart[0]));
-      let cartSubtotal = cart.reduce((acc, res) => {
-          return acc += res.total
-      },0);
-      dispatch(updateCartTotal(cartSubtotal));
+      
     } else {
       tempCart = inventory
         .filter((res) => res.id === id)
