@@ -1,21 +1,23 @@
 import React from "react";
 
 const ProductList = (props) => {
+  const {name, icon, type, price, id} = props;
   // const [quantity, setQuantity] = useState(0)
     return (
+      <div className="card" >
         <div>
             <div className="card-title">
-              { props.name }
+              { name }
             </div>
             <div className="card-body">
-              <i className={`icofont-10x icofont-${props.icon}`}></i>
+              <i className={`icofont-10x icofont-${icon}`}></i>
               <form>
                 <div className="row">
                   <div className="cell">
                     <label>Type:</label>
                   </div>
                   <div className="cell">
-                    <em>{ props.type }</em>
+                    <em>{ type }</em>
                   </div>
                 </div>
                 <div className="row">
@@ -23,7 +25,7 @@ const ProductList = (props) => {
                     <label>Price:</label>
                   </div>
                   <div className="cell">
-                    ${ props.price }
+                    ${ price?.USD }
                   </div>
                 </div>
                 {/* <div className="row">
@@ -39,12 +41,12 @@ const ProductList = (props) => {
               </form>
             </div>
             <div className="card-footer">
-              <button onClick={() => props.addToCart(props.id, parseInt(1))} className="btn btn-light">
+              <button onClick={() => props.addToCart(id, parseInt(1))} className="btn btn-light">
                 Add to cart
               </button>
             </div>
         </div>
-        
+      </div>
     )
 }
 

@@ -3,8 +3,10 @@ import ProductComponent from "./ProductComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAge, fetchUsers } from "../store/sliceReducers";
 import food from '../food.json';
+import useAuth from "../hooks/useAuth";
 
 const DashboardComponent = (props) => {
+    const { auth } = useAuth();
     const dispatch = useDispatch();
     const [searchInput, setSearchInput ] = useState('');
     const [productSearch, setProductSearch] = useState('');
@@ -26,7 +28,7 @@ const DashboardComponent = (props) => {
         setProductSearch(data);
     }
     return (
-        <div>
+        <>
                 {/* <h1>{age}, {name}</h1>
                 <button className="btn btn-primary" 
                     style={actionBtnStyle}
@@ -36,7 +38,7 @@ const DashboardComponent = (props) => {
                     style={actionBtnStyle}
                     onClick={()=>changeName(Math.random().toString(36).substring(2,7))}>Update Name!
                 </button> */}
-                <>
+                <span>Welcome, <strong>{auth?.name.toUpperCase()}</strong></span>
                     <input type="text" 
                     placeholder="Search Products"
                     style={inputTextBoxStyle}
@@ -44,7 +46,6 @@ const DashboardComponent = (props) => {
                     onChange={(e) =>(
                         changeText(e.target.value)
                     )}/>
-                </>
                 <button className="btn btn-primary" 
                     style={actionBtnStyle}
                     onClick={()=>{
@@ -59,7 +60,7 @@ const DashboardComponent = (props) => {
                     }}>Reset
                 </button>
                 <ProductComponent inventory={food} productSearch={productSearch} inventoryType="active" displayType="dashboard"></ProductComponent>
-        </div>
+        </>
     )
 }
 

@@ -8,6 +8,7 @@ import {externalPostCall, externalGetCall} from '../../helpers/api';
 import toastService from "../../helpers/toastService";
 import { useFormik } from 'formik';
 import { signUpSchema } from "../../schemas";
+import {LOGIN} from "../../helpers/constants";
 
 const initialValues = {
     email : "ron4@gmail.com",
@@ -45,10 +46,12 @@ const AuthComponent = () => {
 
     const authenticate = (values) => {
         const payload = values;
-        const signIn = externalPostCall('/v2/admin/login', payload);
+        const signIn = externalPostCall(LOGIN.adminLogin, payload);
         signIn.then((res) => {
             if (res.hasOwnProperty('response') && res['response']['success'] && res['response'].hasOwnProperty('data')) {
-                setStorage('token',res['response'].data);
+                const {token, user} = res['response'].data;
+                setStorage('token',token);
+                setStorage('user',user);
                 toastService();
                 navigate(from, { replace: true });
             } else {

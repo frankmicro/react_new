@@ -64,19 +64,8 @@ const ProductComponent = (props) => {
   return (
     <div>
       {inventoryData
-        ? inventoryData.map((res, index) => (
-            <div className="card" key={index}>
-              <ProductList
-                addToCart={addToCart}
-                key={res.id}
-                id={res.id}
-                name={res.name}
-                icon={res.icon}
-                price={res.price["USD"]}
-                type={res.type}
-                status={res.status}
-              ></ProductList>
-            </div>
+        ? inventoryData.map((res) => (
+              <ProductList addToCart={addToCart} key={res.id} {...res} />
           ))
         : null}
     </div>

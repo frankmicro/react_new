@@ -11,7 +11,7 @@ const Header = (props) => {
     return state.productReducer;
   });
   const logoutUser = () => {
-    clearStorage('token');
+    clearStorage();
     <Navigate to="/login" state={{ from: location }} replace />
   }
     return (
