@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteCartElement, updateCartTotal } from "../store/productReducer";
+import Cart from "../views/Cart";
 
 const CartComponent = () => {
   const dispatch = useDispatch();
@@ -31,20 +32,7 @@ const CartComponent = () => {
          <tbody>
      {
       cart.length ? cart.map((res, index) => (
-        <tr key={res?.id}>
-                  <td width={2} height={1}>
-                    <i className={`icofont-${res?.icon} icofont-3x`}></i>
-                  </td>
-                  <td>{res?.name}</td>
-                  <td>{res?.price['USD']}</td>
-                  <td className="center">{res?.totalQuantity}</td>
-                  <td>{res?.total.toFixed(2)}</td>
-                  <td className="center">
-                    <button 
-                    onClick={() => removeItems(index, res?.total)}
-                    className="btn btn-light cart-remove">&times;</button>
-                  </td>
-                </tr>
+        <Cart  index={index} {...res} removeItems={removeItems} key={res?.id} />
       )) : 
       <tr className="center">
            <td colSpan="6">No items in cart</td>
